@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Satker>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Frekuensi>
  */
-class SatkerFactory extends Factory
+class FrekuensiFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +17,8 @@ class SatkerFactory extends Factory
     public function definition(): array
     {
         return [
-            // 'id'=>'1212',
-            // 'nama_satker'=>'BPS Kabupaten Deli Serdang',
-            // 'alamat_satker'=>'Jl Santai'
+
+ 
         ];
     }
 }

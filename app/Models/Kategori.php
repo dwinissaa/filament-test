@@ -8,8 +8,8 @@ class Kategori extends Model
 {
     protected $table = "kategoris";
     protected $guarded = [];
-    public function spj()
+    public function indikator()
     {
-        return $this->hasMany(Spj::class, 'id', 'kode_kategori');
+        return $this->hasMany(Indikator::class, 'kategori_id', 'id');
     }
 }

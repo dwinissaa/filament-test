@@ -4,32 +4,35 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\Kategori;
+use Filament\Forms\Get;
 use Filament\Forms\Form;
+use App\Models\Frekuensi;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\KategoriResource\Pages;
+use App\Filament\Resources\FrekuensiResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\KategoriResource\RelationManagers;
-use PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\Wizard\TextValue;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Filament\Resources\FrekuensiResource\RelationManagers;
 
-class KategoriResource extends Resource
+class FrekuensiResource extends Resource
 {
-    protected static ?string $model = Kategori::class;
+    use HasFactory;
+    protected static ?string $model = Frekuensi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Play Data';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('id')->readOnly(),
-                TextInput::make('nama_kategori')->required(),
+                TextInput::make('frekuensi'),
             ]);
     }
 
@@ -38,7 +41,7 @@ class KategoriResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('nama_kategori'),
+                TextColumn::make('frekuensi'),
             ])
             ->filters([
                 //
@@ -64,9 +67,9 @@ class KategoriResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListKategoris::route('/'),
-            'create' => Pages\CreateKategori::route('/create'),
-            'edit' => Pages\EditKategori::route('/{record}/edit'),
+            'index' => Pages\ListFrekuensis::route('/'),
+            'create' => Pages\CreateFrekuensi::route('/create'),
+            'edit' => Pages\EditFrekuensi::route('/{record}/edit'),
         ];
     }
 }

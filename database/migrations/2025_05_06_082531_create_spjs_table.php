@@ -12,16 +12,16 @@ return new class extends Migration {
     {
         Schema::create('spjs', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_satker');
-            $table->foreign('kode_satker')
-                ->references('kode_satker')
+            $table->string('satker_id')->length(4);
+            $table->foreign('satker_id')
+                ->references('id')
                 ->on('satkers')
                 ->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('judul_spj');
-            $table->string('kode_kategori');
             $table->string('deskripsi');
-            $table->string('status')->default('Draft');
-            $table->string('attachment');
+            $table->string('status')->default('1');
+            $table->string('attachment')->nullable();
+            $table->date('tanggal_spj');
             $table->timestamps();
         });
 

@@ -10,12 +10,12 @@ class Satker extends Model
     use HasFactory;
     protected $table = "satkers";
     protected $guarded = [];
-    protected $primaryKey = 'kode_satker';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
 
     public function spj()
     {
-        return $this->hasMany(Spj::class,'kode_satker','kode_satker');
+        return $this->hasMany(Spj::class,'satker_id','id');
     }
 }

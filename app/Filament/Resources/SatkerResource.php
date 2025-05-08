@@ -19,13 +19,13 @@ class SatkerResource extends Resource
 {
     protected static ?string $model = Satker::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('kode_satker')->required(),
+                TextInput::make('id')->required(),
                 TextInput::make('nama_satker')->required(),
                 TextInput::make('alamat_satker')->required(),
             ]);
@@ -35,7 +35,7 @@ class SatkerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('kode_satker'),
+                TextColumn::make('id'),
                 TextColumn::make('nama_satker'),
                 TextColumn::make('alamat_satker')
             ])
@@ -43,7 +43,9 @@ class SatkerResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -63,7 +65,7 @@ class SatkerResource extends Resource
     {
         return [
             'index' => Pages\ListSatkers::route('/'),
-            'create' => Pages\CreateSatker::route('/create'),
+            // 'create' => Pages\CreateSatker::route('/create'),
             'edit' => Pages\EditSatker::route('/{record}/edit'),
         ];
     }
