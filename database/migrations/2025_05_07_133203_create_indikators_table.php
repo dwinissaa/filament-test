@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreign('satker_id')->references('id')->on('satkers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('kategori_id')->length(2)->constrained('kategoris', 'id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama_indikator');
-            $table->foreignId('karakteristik_id')->constrained('karakteristiks', 'id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('karakteristik_id')->constrained('karakteristiks', 'id')->cascadeOnDelete()->cascadeOnUpdate()->nullable();
             $table->string('tipe_indikator');
             $table->foreignId('frekuensi_id')->constrained('frekuensis', 'id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

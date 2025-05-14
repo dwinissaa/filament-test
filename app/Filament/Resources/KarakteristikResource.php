@@ -69,7 +69,7 @@ class KarakteristikResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('nama_karakteristik'),
                 TextColumn::make('jenis_karakteristik_id')
-                    ->getStateUsing(fn($record) => $record->jenis_karakteristik->pluck('jenis_karakteristik')->implode(',')),
+                    ->getStateUsing(fn($record) => $record->jenis_karakteristik->pluck('jenis_karakteristik')->implode(', ')),
             ])
             ->filters([
                 //

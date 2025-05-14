@@ -14,9 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('indikator_id')->constrained('indikators', 'id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('jenis_karakteristik_id')->constrained('jenis_karakteristiks', 'id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('data');
             $table->string('waktu');
+            // $table->primary(['indikator_id', 'jenis_karakteristik_id','waktu']);
+            $table->string('data');
             $table->timestamps();
+            $table->unique(['indikator_id', 'jenis_karakteristik_id', 'waktu']);
         });
     }
 

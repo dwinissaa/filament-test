@@ -32,12 +32,12 @@ class IndikatorResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('satker_id')->options(Satker::all()->pluck('nama_satker', 'id')->toArray())->getOptionLabelsUsing(fn($record) => "($record->id) $record->nama_satker"),
-                Select::make('kategori_id')->options(Kategori::all()->pluck('nama_kategori', 'id')->toArray())->getOptionLabelsUsing(fn($record) => "($record->id) $record->nama_kategori"),
-                TextInput::make('nama_indikator'),
-                Select::make('karakteristik_id')->options(Karakteristik::all()->pluck('nama_karakteristik', 'id')->toArray()),
-                Select::make('tipe_indikator')->options(options: ['string' => 'string', 'integer' => 'integer', 'float' => 'float']),
-                Select::make('frekuensi_id')->options(Frekuensi::all()->pluck('frekuensi', 'id')->toArray()),
+                Select::make('satker_id')->options(Satker::all()->pluck('nama_satker', 'id'))->getOptionLabelsUsing(fn($record) => "($record->id) $record->nama_satker")->required(),
+                Select::make('kategori_id')->options(Kategori::all()->pluck('nama_kategori', 'id'))->getOptionLabelsUsing(fn($record) => "($record->id) $record->nama_kategori")->required(),
+                TextInput::make('nama_indikator')->required(),
+                Select::make('karakteristik_id')->options(Karakteristik::all()->pluck('nama_karakteristik', 'id')),
+                Select::make('tipe_indikator')->options(options: ['string' => 'string', 'integer' => 'integer', 'float' => 'float'])->required(),
+                Select::make('frekuensi_id')->options(Frekuensi::all()->pluck('frekuensi', 'id'))->required(),
             ]);
     }
 

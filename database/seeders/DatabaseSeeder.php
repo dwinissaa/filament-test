@@ -45,7 +45,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         
-
         // Karakteristik::factory()->create([
             
         // ]);
