@@ -14,7 +14,7 @@ class SpjImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('kode_satker')
+            ImportColumn::make('satker_id')
                 ->requiredMapping()
                 ->rules(['required', 'max:255']),
             ImportColumn::make('judul_spj')
@@ -25,7 +25,11 @@ class SpjImporter extends Importer
                 ->rules(['required', 'max:255']),
             ImportColumn::make('status')
                 ->requiredMapping()
-                ->rules(['required', 'max:255']),
+                ->rules(['required', 'integer', 'between:1,5']),
+            ImportColumn::make('tanggal_spj')
+                ->label('Tanggal (YYY-MM-DD)')
+                ->requiredMapping()
+                ->rules(['required', 'date']), // hanya akan menerima format yang valid,
             ImportColumn::make('attachment')
                 ->requiredMapping()
                 ->rules(['required', 'max:255']),

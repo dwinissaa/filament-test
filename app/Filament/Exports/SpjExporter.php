@@ -3,9 +3,11 @@
 namespace App\Filament\Exports;
 
 use App\Models\Spj;
-use Filament\Actions\Exports\ExportColumn;
+use Illuminate\Support\Facades\Log;
 use Filament\Actions\Exports\Exporter;
+use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Models\Export;
+use App\Services\SpjExportService;
 
 class SpjExporter extends Exporter
 {
@@ -16,7 +18,8 @@ class SpjExporter extends Exporter
         return [
             ExportColumn::make('id')
                 ->label('ID'),
-            ExportColumn::make('kode_satker'),
+            ExportColumn::make('satker_id')
+                ->formatStateUsing(fn($state,$record) => "($state) " . "{$record->satker->nama_satker}" ?? 'N/A'),
             ExportColumn::make('judul_spj'),
             ExportColumn::make('deskripsi'),
             ExportColumn::make('status'),
@@ -35,5 +38,11 @@ class SpjExporter extends Exporter
         }
 
         return $body;
+    }
+
+    public function query()
+    {
+        Log::info('Running Export Query...');
+        return Spj::query();
     }
 }

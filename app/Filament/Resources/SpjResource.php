@@ -50,7 +50,7 @@ class SpjResource extends Resource
                         Select::make('satker_id')
                             ->relationship('satker', 'satker_id')
                             ->searchable(true)
-                            ->getOptionLabelFromRecordUsing(fn($record) => "($record->satker_id) $record->nama_satker")
+                            ->formatStateUsing(fn($record) => "($record->satker_id) {$record->satker->nama_satker}")
                             ->getSearchResultsUsing(function (string $search) {
                                 return Satker::query()
                                     ->where('satkers.id', 'like', "%{$search}%")
@@ -111,15 +111,15 @@ class SpjResource extends Resource
     {
         return $table
             ->emptyStateActions([
-                Action::make('create')
-                    ->label('Buat SPJ')
-                    ->url('spjs/create')
-                    ->icon('heroicon-m-plus')
-                    ->button(),
+                // Action::make('create')
+                //     ->label('Buat SPJ')
+                //     ->url('spjs/create')
+                //     ->icon('heroicon-m-plus')
+                //     ->button(),
             ])
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('satker_id')->getStateUsing(fn($record) => "({$record->satker_id}) {$record->satker->nama_satker}"),
+                TextColumn::make('satker_id')->formatStateUsing(fn($record) => "($record->satker_id) {$record->satker->nama_satker}"),
                 TextColumn::make('judul_spj'),
                 TextColumn::make('deskripsi'),
                 TextColumn::make('status')
@@ -153,9 +153,16 @@ class SpjResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->headerActions([
+                // Action::make('create')
+                // ->label('Buataja SPJ')
+                // ->url('spjs.create')
+                // ->icon('heroicon-m-plus')
+                // ->button()
+                // ->visible(false),  // Menyembunyikan tombol jika tidak ada data
                 ExportAction::make()
                     ->label('Export')
-                    ->exporter(SpjExporter::class),
+                    ->exporter(SpjExporter::class)
+                    ->visible(Spj::query()->count() > 0),
                 ImportAction::make()
                     ->importer(SpjImporter::class)
             ])
